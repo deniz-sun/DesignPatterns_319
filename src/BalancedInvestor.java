@@ -1,6 +1,8 @@
 public class BalancedInvestor extends User{
+    private int transactionCount;
     public BalancedInvestor(StockMarket stockMarket, String name, double investment_budget) {
         super(stockMarket, name, investment_budget);
+        transactionCount = 0;
     }
 
     @Override
@@ -8,6 +10,9 @@ public class BalancedInvestor extends User{
         if (stock.getPercentChange() < 0 && (investment_budget > 20* stock.getPrice())){
             double investment = investment_budget * 0.08;
             int amountToBuy = (int) Math.floor(investment / stock.getPrice());
+            transactionCount++;
+            System.out.println(name + " calculated that they should buy " + amountToBuy + " shares of " + stock.getName() + " (" + stock.getSymbol() + ").");
+
             return amountToBuy;
 
         }
@@ -22,12 +27,15 @@ public class BalancedInvestor extends User{
     public int shouldSellStock(Stock stock) {
         if (stock.getPercentChange() > 0 &&  (investment_budget < 1000* stock.getPrice()) && investment_portfolio.containsKey(stock.getName())) {
             double maxAmount = investment_budget * 0.08;
-            int amountToSell = investment_portfolio.getOrDefault(stock.getName(), 0);
+            int amountToSell = (int) Math.floor(maxAmount / stock.getPrice());
             if (amountToSell > 0) {
-                //?????????????????????????
-                return Math.min(amountToSell, (int) (maxAmount / stock.getPrice()));
+                transactionCount++;
+                System.out.println(name + " calculated that they should sell " + amountToSell + " shares of " + stock.getName() + " (" + stock.getSymbol() + ").");
+                return amountToSell;
             }
         }
             return 0;
     }
 }
+
+

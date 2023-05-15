@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class StockMarket {
@@ -6,13 +7,23 @@ public class StockMarket {
     private String symbol;
     private LinkedList<Stock> stocks;
     private boolean isOpen;
-    private StockMarketState state;
+    StockMarketState state;
+    StockMarketState openState;
+    StockMarketState closeState;
+    StockMarketState highVolatileState;
+    StockMarketState lowVolatileState;
 
     public StockMarket(String name, String symbol) {
         this.name = name;
         this.symbol = symbol;
         this.stocks = new LinkedList<>();
         this.isOpen = false;
+        openState = new OpenState(this);
+        closeState = new CloseState(this);
+        highVolatileState = new HighVolatileState(this);
+        lowVolatileState = new LowVolatileState(this);
+
+        state = closeState;
     }
 
     public String getName() {
@@ -33,9 +44,14 @@ public class StockMarket {
 
     @Override
     public String toString() {
-        return "--- Stock Market Information ---" +
-                "\nName = " + name + "(" + symbol + ")" +
-                "\nStocks = " + stocks;
+       StringBuilder result = new StringBuilder();
+       result.append("--- Stock Market Information ---" + "\nName = ").append(name).append(" (").append(symbol).append(")").append("\nStocks: \n");
+       if (stocks.isEmpty())
+           result.append("No stocks available.");
+       for (Stock stock : stocks) {
+           result.append(stock.toString()).append("\n");
+       }
+       return result.toString();
     }
     public boolean open(){
         if(!isOpen){

@@ -1,6 +1,8 @@
 public class ConservativeInvestor extends User{
+    private int transactionCount;
     public ConservativeInvestor(StockMarket stockMarket, String name, double investment_budget) {
         super(stockMarket, name, investment_budget);
+        transactionCount = 0;
     }
 
     @Override
@@ -8,6 +10,9 @@ public class ConservativeInvestor extends User{
         if (stock.getPercentChange() < 0 && (investment_budget > 25* stock.getPrice())){
             double investment = investment_budget * 0.05;
             int amountToBuy = (int) Math.floor(investment / stock.getPrice());
+            transactionCount++;
+            System.out.println(name + " calculated that they should buy " + amountToBuy + " shares of " + stock.getName() + " (" + stock.getSymbol() + ").");
+
             return amountToBuy;
 
         }
@@ -23,9 +28,15 @@ public class ConservativeInvestor extends User{
 
     @Override
     public int shouldSellStock(Stock stock) {
-        if (stock.getPercentChange() > 0 && (investment_budget > 75* stock.getPrice()) && investment_portfolio.containsKey(stock.getName())){
-            double amountToSell = investment_portfolio.getOrDefault(stock.getName(), 0);
+        if (stock.getPercentChange() > 0 && (investment_budget > 75 * stock.getPrice()) && investment_portfolio.containsKey(stock.getName())){
+            int amountToSell = (int) Math.floor(investment_budget / stock.getPrice());
+            if (amountToSell > 0) {
+                transactionCount++;
+                System.out.println(name + " calculated that they should sell " + amountToSell + " shares of " + stock.getName() + " (" + stock.getSymbol() + ").");
+                return amountToSell;
+            }
         }
         return 0;
     }
 }
+

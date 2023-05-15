@@ -1,10 +1,22 @@
 public class Tester {
     public static void main(String[] args) {
+        Stock stock = new Stock("Apple", "AAPL", 100.00, -3.28, 1001513.0, 1024150.0);
+        System.out.println(stock);
+        Stock microsoft = new Stock("Microsoft", "MSFT", 123.4, 3.28, 1001513.0, 1024150.0);
         StockMarket stockMarket = new StockMarket("New York Stock Exchange", "NYSE");
-        Stock stock = new Stock("Apple", "AAPL", 100.00, 3.2, 1000000, 10000);
+        stockMarket.open();
         stockMarket.addStock(stock);
-        User balancedInvestor = new BalancedInvestor(stockMarket, "Cool Person",
-                1000000);
-        stock.update(97.7, 2.3, 274242, 252343224);
+        stockMarket.addStock(microsoft);
+        System.out.println(stockMarket);
+        StockMarket emptymarket = new StockMarket("NASDAQ", "NASDAQ");
+        System.out.println(emptymarket);
+        AggressiveInvestor jeff = new AggressiveInvestor(stockMarket, "Beff Jezos", 990023.21);
+        jeff.investment_portfolio.put("Microsoft", 1731);
+        jeff.shouldSellStock(microsoft);
+
+
+
+
+
     }
 }

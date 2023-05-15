@@ -66,8 +66,8 @@ public class Stock {
 
     public String toString(){
         return "--- Stock Information ---" +
-                "\nName: " + name + "(" + symbol + ")" +
-                "\nPrice: " + price +
+                "\nName: " + name + " (" + symbol + ")" +
+                "\nPrice: " + price + " TRY" +
                 "\nPercent Change: " + percentChange +
                 "\nVolume: " + volume +
                 "\nMarket Cap: " + marketCap;
