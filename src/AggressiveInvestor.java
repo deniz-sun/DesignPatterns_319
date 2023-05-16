@@ -1,6 +1,5 @@
 public class AggressiveInvestor extends User {
     private static final int MAX_TRANSACTIONS_PER_DAY = 10;
-    private int transactionCount;
     public AggressiveInvestor(StockMarket stockMarket, String name, double investmentBudget) {
         super(stockMarket, name, investmentBudget);
         transactionCount = 0;
@@ -40,5 +39,11 @@ public class AggressiveInvestor extends User {
     }
     public boolean canMakeTransaction(){
         return transactionCount < MAX_TRANSACTIONS_PER_DAY;
+    }
+    public int getMaxTransactionsPerDay(){
+        return MAX_TRANSACTIONS_PER_DAY;
+    }
+    public String getUserType(){
+        return "Aggressive Investor";
     }
 }

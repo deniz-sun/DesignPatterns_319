@@ -1,5 +1,6 @@
 public class ConservativeInvestor extends User{
-    private int transactionCount;
+
+    private static final int MAX_TRANSACTIONS_PER_DAY = 5;
     public ConservativeInvestor(StockMarket stockMarket, String name, double investment_budget) {
         super(stockMarket, name, investment_budget);
         transactionCount = 0;
@@ -37,6 +38,15 @@ public class ConservativeInvestor extends User{
             }
         }
         return 0;
+    }
+    public boolean canMakeTransaction(){
+        return transactionCount < MAX_TRANSACTIONS_PER_DAY;
+    }
+    public int getMaxTransactionsPerDay(){
+        return MAX_TRANSACTIONS_PER_DAY;
+    }
+    public String getUserType(){
+        return "Balanced Investor";
     }
 }
 

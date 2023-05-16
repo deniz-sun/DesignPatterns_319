@@ -11,8 +11,11 @@ public class Tester {
         StockMarket emptymarket = new StockMarket("NASDAQ", "NASDAQ");
         System.out.println(emptymarket);
         AggressiveInvestor jeff = new AggressiveInvestor(stockMarket, "Beff Jezos", 990023.21);
-        jeff.investment_portfolio.put("Microsoft", 1731);
-        jeff.shouldSellStock(microsoft);
+
+        //962 vs 802
+        stockMarket.buyStock(microsoft, 802, jeff);
+        stockMarket.sellStock(microsoft, 802, jeff);
+
 
 
 

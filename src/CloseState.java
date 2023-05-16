@@ -8,4 +8,7 @@ public class CloseState implements StockMarketState {
     public double calculateTransactionFee(double price, double volume) {
         return 0.0;
     }
+    public double getTransactionFee(){
+        return 0.0;
+    }
 }

@@ -7,6 +7,7 @@ public abstract class User {
     protected StockMarket stockMarket;
     protected double investment_budget;
     protected Map<String, Integer> investment_portfolio;
+    protected int transactionCount;
 
     public User(StockMarket stockMarket, String name, double investment_budget){
         this.name = name;
@@ -25,5 +26,8 @@ public abstract class User {
     public void updateStockMarket(StockMarket stockMarket){
         this.stockMarket = stockMarket;
     }
+    public abstract boolean canMakeTransaction();
+    public abstract String getUserType();
+    public abstract int getMaxTransactionsPerDay();
 
 }

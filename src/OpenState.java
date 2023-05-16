@@ -10,4 +10,7 @@ public class OpenState implements StockMarketState {
     public double calculateTransactionFee(double price, double volume) {
         return price * volume * TRANSACTION_FEE;
     }
+    public double getTransactionFee(){
+        return TRANSACTION_FEE;
+    }
 }
